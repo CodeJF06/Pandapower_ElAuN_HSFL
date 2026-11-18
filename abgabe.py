@@ -83,6 +83,17 @@ def schreibe(datei, text):
     print(f"Geschrieben: {datei} ({os.path.getsize(datei) / 1024:.0f} kB)")
 
 
+def in_zip(z, quelle, name):
+    """Datei mit festem Zeitstempel (heutiges Datum) in die ZIP schreiben, damit
+    sich die ZIP bei gleichem Inhalt nicht bei jedem Lauf aendert."""
+    info = zipfile.ZipInfo(name.replace(os.sep, "/"),
+                           date_time=datetime.date.today().timetuple()[:6])
+    info.compress_type = zipfile.ZIP_DEFLATED
+    info.external_attr = 0o644 << 16
+    with open(quelle, "rb") as f:
+        z.writestr(info, f.read())
+
+
 def packe_zip():
     """Skripte, Abgaben und den Ordner ergebnisse/ in eine ZIP-Datei packen."""
     dateien = list(ZIP_DATEIEN) + [MIT_BILDERN]
@@ -91,7 +102,7 @@ def packe_zip():
     with zipfile.ZipFile(ZIP, "w", zipfile.ZIP_DEFLATED) as z:
         for datei in dict.fromkeys(dateien):
             name = os.path.basename(datei) if datei == MIT_BILDERN else os.path.relpath(datei)
-            z.write(datei, arcname=name.replace(os.sep, "/"))
+            in_zip(z, datei, name)
     print(f"Geschrieben: {ZIP} ({len(set(dateien))} Dateien, "
           f"{os.path.getsize(ZIP) / 1024:.0f} kB)")
 
@@ -101,9 +112,9 @@ def packe_bericht_zip():
     with open(AUSGABE, encoding="utf-8") as f:
         bilder = re.findall(r"!\[[^\]]*\]\(([^)]+\.png)\)", f.read())
     with zipfile.ZipFile(ZIP_BERICHT, "w", zipfile.ZIP_DEFLATED) as z:
-        z.write(AUSGABE, arcname=os.path.basename(AUSGABE))
+        in_zip(z, AUSGABE, os.path.basename(AUSGABE))
         for bild in dict.fromkeys(bilder):
-            z.write(os.path.join(os.path.dirname(AUSGABE) or ".", bild), arcname=bild)
+            in_zip(z, os.path.join(os.path.dirname(AUSGABE) or ".", bild), bild)
     print(f"Geschrieben: {ZIP_BERICHT} ({len(set(bilder)) + 1} Dateien, "
           f"{os.path.getsize(ZIP_BERICHT) / 1024:.0f} kB)")
 
