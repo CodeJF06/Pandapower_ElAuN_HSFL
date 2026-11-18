@@ -2,8 +2,7 @@
 
 Oben im Abschnitt NETZDATEN wird das Netz beschrieben, beim Ausfuehren (F5)
 wird es aufgebaut, berechnet und als Markdown-Datei mit Netzplan gespeichert.
-Fuer ein neues Netz: Datei kopieren (z.B. aufgabe2.py) und nur den Abschnitt
-NETZDATEN anpassen.
+Fuer ein anderes Netz nur den Abschnitt NETZDATEN anpassen.
 """
 
 # ===========================================================================
@@ -327,6 +326,8 @@ def plot_netz(net, datei, titel=None):
 # ---------------------------------------------------------------------------
 
 def main():
+    # Pfade gelten relativ zum Ordner dieser Datei, egal von wo gestartet wird
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     ordner = os.path.dirname(AUSGABE) or "."
     os.makedirs(ordner, exist_ok=True)
     stamm = os.path.splitext(os.path.basename(AUSGABE))[0]
