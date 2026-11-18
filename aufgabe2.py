@@ -69,7 +69,18 @@ ABSCHNITTE = [
             {"titel": "Q halbiert", "V1": {"q_kvar": 7.5}},
             {"titel": "Q verdoppelt", "V1": {"q_kvar": 30}},
         ],
-        "notiz": "",
+        "notiz": (
+            "**Erwartung:** Mehr Leistung bedeutet mehr Strom und damit einen größeren "
+            "Spannungsfall (ΔU ≈ (R·P + X·Q) / U).\n\n"
+            "**Beobachtung:** Der Spannungsfall bis Knoten 4 liegt im Ausgangszustand bei "
+            "0,028 p.u. Halbe Wirkleistung verringert ihn auf 0,016 p.u., doppelte "
+            "vergrößert ihn auf 0,054 p.u. (Knoten 4 sinkt auf 0,996 p.u.). Halbe bzw. "
+            "doppelte Blindleistung ändert ihn nur auf 0,026 bzw. 0,032 p.u. Die "
+            "Wirkleistung wirkt also deutlich stärker, weil beim Kabel R' größer ist "
+            "als X' (X/R = 0,36). Die Auslastung steigt mit der Scheinleistung "
+            "(P doppelt: 48,8 %, Q doppelt: 29,3 %). Das externe Netz liefert die Last "
+            "plus die Leitungsverluste (Ausgangszustand 41,11 kW, d. h. 1,11 kW Verluste)."
+        ),
     },
     {
         "titel": "2.2 Generator an Knoten 4 (Wirkleistung)",
@@ -81,7 +92,16 @@ ABSCHNITTE = [
             {"titel": "P = 50 kW", "G4": {"p_kw": 50}},
             {"titel": "P = 0 kW", "G4": {"p_kw": 0}},
         ],
-        "notiz": "",
+        "notiz": (
+            "**Beobachtung:** Mit Einspeisung kehrt sich der Leistungsfluss um: Die "
+            "Spannung steigt vom Speiseknoten zum Generator hin an, etwa proportional "
+            "zur Wirkleistung (50 kW: Knoten 4 bei 1,079 p.u., +0,029 p.u.). Der "
+            "Speiseknoten bleibt als Slack fest bei 1,05 p.u. Das externe Netz nimmt "
+            "die Leistung auf (negatives P), um die Verluste weniger als eingespeist "
+            "(50 kW → 48,64 kW, 1,36 kW Verluste), und liefert die geringe Blindleistung "
+            "der Leitungen. Bei P = 0 kW ist das Netz unbelastet, alle Knoten liegen "
+            "bei 1,05 p.u."
+        ),
     },
     {
         "titel": "2.3 Generator an Knoten 4 (Blindleistung, P = 0)",
@@ -92,7 +112,16 @@ ABSCHNITTE = [
             {"titel": "25 kvar kapazitiv", "G4": {"q_kvar": 25}},
             {"titel": "50 kvar kapazitiv", "G4": {"q_kvar": 50}},
         ],
-        "notiz": "",
+        "notiz": (
+            "**Beobachtung:** Induktive Blindleistung (Aufnahme) senkt die Spannung am "
+            "Generator, kapazitive (Abgabe) hebt sie an: 50 kvar induktiv −0,011 p.u., "
+            "50 kvar kapazitiv +0,010 p.u. Im Vergleich zu 50 kW Wirkleistung "
+            "(+0,029 p.u.) wirkt Blindleistung nur etwa ein Drittel so stark (X/R = 0,36). "
+            "Die Blindleistung wird vollständig vom externen Netz geliefert bzw. "
+            "aufgenommen, die Wirkleistung am Speiseknoten entspricht nur den Verlusten "
+            "(ca. 1,4 kW). Obwohl keine Wirkleistung übertragen wird, sind die Leitungen "
+            "zu etwa 28 % ausgelastet, weil der Blindstrom sie ebenfalls belastet."
+        ),
     },
     {
         "titel": "2.4 Weitere Lasten an Knoten 2 und 3 (Generator aus)",
@@ -101,7 +130,14 @@ ABSCHNITTE = [
             {"titel": "V2 und V3"},
             {"titel": "V2 und V3, zusätzlich V1", "V1": {"an": True}},
         ],
-        "notiz": "",
+        "notiz": (
+            "**Beobachtung:** Die Spannung fällt vom Speiseknoten zum Strangende "
+            "monoton ab. Der Spannungsfall je Abschnitt wird nach hinten kleiner, weil "
+            "hinter jeder Last weniger Strom fließt: Mit V2 und V3 0,0088 / 0,0045 / "
+            "0 p.u. (hinter Knoten 3 fließt kein Strom mehr, Knoten 3 und 4 haben "
+            "dieselbe Spannung). Mit zusätzlich V1 0,0185 / 0,0140 / 0,0094 p.u., "
+            "insgesamt 0,042 p.u. (ca. 4 %)."
+        ),
     },
     {
         "titel": "2.5 Generatoren an Knoten 2 und 4 mit je 30 kW",
@@ -110,7 +146,13 @@ ABSCHNITTE = [
             {"titel": "ohne Generatoren (wie 2.4)", "G2": {"an": False}, "G4": {"an": False}},
             {"titel": "G2 und G4 je 30 kW"},
         ],
-        "notiz": "",
+        "notiz": (
+            "**Beobachtung:** Mit 60 kW Erzeugung bei 40 kW Last wird ins vorgelagerte "
+            "Netz zurückgespeist (19,71 kW). Alle Knotenspannungen liegen jetzt über der "
+            "Speisespannung und steigen zum Strangende hin an (Knoten 4: 1,061 p.u., "
+            "gegenüber 2.4 um 0,024 p.u. höher). Die Auslastung sinkt von 23,7 % auf "
+            "16,9 %, weil ein Großteil der Last lokal gedeckt wird."
+        ),
     },
     {
         "titel": "2.6 Kompensation durch induktive Blindleistung",
@@ -121,7 +163,16 @@ ABSCHNITTE = [
             for q in (0, 10, 20, 30, 40)
         ],
         "kompensation": {"generatoren": ["G2", "G4"], "ziel_u_pu": 1.05},
-        "notiz": "",
+        "notiz": (
+            "**Beobachtung:** Die Spannungserhöhung lässt sich kompensieren. Dafür muss "
+            "jeder Generator etwa 1,22 kvar pro kW induktiv aufnehmen, also je 36,6 kvar "
+            "(zusammen 73,2 kvar, cos φ ≈ 0,63 untererregt). Weil das Kabel einen "
+            "kleinen X/R-Wert hat, ist dafür sehr viel Blindleistung nötig. Nachteile: "
+            "Das externe Netz muss rund 84 kvar liefern, die Auslastung steigt von "
+            "16,9 % auf 48,8 % und die Verluste von 0,29 kW auf 2,19 kW. In der Praxis "
+            "ist ein so kleiner cos φ unüblich; in Niederspannungsnetzen ist "
+            "Blindleistung deshalb nur begrenzt wirksam."
+        ),
     },
 ]
 
