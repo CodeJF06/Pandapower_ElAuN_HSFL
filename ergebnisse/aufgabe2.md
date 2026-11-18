@@ -58,7 +58,7 @@ Gemeinsame Einstellung: V1: aus; G4: an
 
 ![Spannungsprofil 2.2 Generator an Knoten 4 (Wirkleistung)](aufgabe2_profil_2.png)
 
-**Beobachtung:** Mit Einspeisung kehrt sich der Leistungsfluss um: Die Spannung steigt vom Speiseknoten zum Generator hin an, etwa proportional zur Wirkleistung (50 kW: Knoten 4 bei 1,079 p.u., +0,029 p.u.). Der Speiseknoten bleibt als Slack fest bei 1,05 p.u. Das externe Netz nimmt die Leistung auf (negatives P), um die Verluste weniger als eingespeist (50 kW → 48,64 kW, 1,36 kW Verluste), und liefert die geringe Blindleistung der Leitungen. Bei P = 0 kW ist das Netz unbelastet, alle Knoten liegen bei 1,05 p.u.
+**Beobachtung:** Mit Einspeisung kehrt sich der Leistungsfluss um: Die Spannung steigt vom Speiseknoten zum Generator hin an, etwa proportional zur Wirkleistung (50 kW: Knoten 4 bei 1,079 p.u., +0,029 p.u.). Der Speiseknoten bleibt als Slack fest bei 1,05 p.u. Das externe Netz nimmt die eingespeiste Leistung abzüglich der Leitungsverluste auf (negatives P; 50 kW → 48,64 kW, also 1,36 kW Verluste) und liefert die geringe Blindleistung der Leitungen. Bei P = 0 kW ist das Netz unbelastet, alle Knoten liegen bei 1,05 p.u.
 
 ## 2.3 Generator an Knoten 4 (Blindleistung, P = 0)
 
@@ -99,7 +99,7 @@ Gemeinsame Einstellung: V1: aus; V2: an; V3: an; G4: an, P = 30 kW; G2: an
 
 ![Spannungsprofil 2.5 Generatoren an Knoten 2 und 4 mit je 30 kW](aufgabe2_profil_5.png)
 
-**Beobachtung:** Mit 60 kW Erzeugung bei 40 kW Last wird ins vorgelagerte Netz zurückgespeist (19,71 kW). Alle Knotenspannungen liegen jetzt über der Speisespannung und steigen zum Strangende hin an (Knoten 4: 1,061 p.u., gegenüber 2.4 um 0,024 p.u. höher). Die Auslastung sinkt von 23,7 % auf 16,9 %, weil ein Großteil der Last lokal gedeckt wird.
+**Beobachtung:** Mit 60 kW Erzeugung bei 40 kW Last wird ins vorgelagerte Netz zurückgespeist (19,71 kW). Alle Knoten hinter dem Speiseknoten liegen jetzt über 1,05 p.u., die Spannung steigt zum Strangende hin an (Knoten 4: 1,061 p.u., gegenüber 2.4 um 0,024 p.u. höher). Die Auslastung sinkt von 23,7 % auf 16,9 %, weil ein Großteil der Last lokal gedeckt wird.
 
 ## 2.6 Kompensation durch induktive Blindleistung
 
@@ -114,7 +114,7 @@ Gemeinsame Einstellung: V1: aus; V2: an; V3: an; G4: an, P = 30 kW; G2: an
 | Q = −40 kvar je Generator | G2: Q = −40 kvar (induktiv); G4: Q = −40 kvar (induktiv) | 1.0500 | 1.0472 | 1.0458 | 1.0490 | −17.47 | 90.89 | 52.6 |
 | **benötigte Kompensation** | G2: Q = −36.6 kvar (induktiv); G4: Q = −36.6 kvar (induktiv) | 1.0500 | 1.0477 | 1.0466 | 1.0500 | −17.81 | 83.99 | 48.8 |
 
-**Kompensation:** Damit keine Knotenspannung über 1.05 p.u. liegt, müssen G2, G4 je **1.22 kvar pro kW** induktive Blindleistung aufnehmen (|Q|/P = 1.22, cos φ = 0.634 untererregt), zusammen 73.2 kvar. G2: −36.6 kvar, G4: −36.6 kvar.
+**Kompensation:** Damit keine Knotenspannung über 1,05 p.u. liegt, müssen G2 und G4 je **1,22 kvar pro kW** induktive Blindleistung aufnehmen (|Q|/P = 1,22, cos φ = 0,634 untererregt), zusammen 73,2 kvar: G2 −36,6 kvar, G4 −36,6 kvar.
 
 ![Spannungsprofil 2.6 Kompensation durch induktive Blindleistung](aufgabe2_profil_6.png)
 

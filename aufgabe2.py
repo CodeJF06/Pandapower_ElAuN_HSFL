@@ -97,9 +97,9 @@ ABSCHNITTE = [
             "Spannung steigt vom Speiseknoten zum Generator hin an, etwa proportional "
             "zur Wirkleistung (50 kW: Knoten 4 bei 1,079 p.u., +0,029 p.u.). Der "
             "Speiseknoten bleibt als Slack fest bei 1,05 p.u. Das externe Netz nimmt "
-            "die Leistung auf (negatives P), um die Verluste weniger als eingespeist "
-            "(50 kW → 48,64 kW, 1,36 kW Verluste), und liefert die geringe Blindleistung "
-            "der Leitungen. Bei P = 0 kW ist das Netz unbelastet, alle Knoten liegen "
+            "die eingespeiste Leistung abzüglich der Leitungsverluste auf (negatives P; "
+            "50 kW → 48,64 kW, also 1,36 kW Verluste) und liefert die geringe "
+            "Blindleistung der Leitungen. Bei P = 0 kW ist das Netz unbelastet, alle Knoten liegen "
             "bei 1,05 p.u."
         ),
     },
@@ -148,8 +148,8 @@ ABSCHNITTE = [
         ],
         "notiz": (
             "**Beobachtung:** Mit 60 kW Erzeugung bei 40 kW Last wird ins vorgelagerte "
-            "Netz zurückgespeist (19,71 kW). Alle Knotenspannungen liegen jetzt über der "
-            "Speisespannung und steigen zum Strangende hin an (Knoten 4: 1,061 p.u., "
+            "Netz zurückgespeist (19,71 kW). Alle Knoten hinter dem Speiseknoten liegen "
+            "jetzt über 1,05 p.u., die Spannung steigt zum Strangende hin an (Knoten 4: 1,061 p.u., "
             "gegenüber 2.4 um 0,024 p.u. höher). Die Auslastung sinkt von 23,7 % auf "
             "16,9 %, weil ein Großteil der Last lokal gedeckt wird."
         ),
@@ -626,13 +626,18 @@ def main():
                 kurven.append((titel, net_k))
                 cos_phi = 1 / math.sqrt(1 + k ** 2)
                 q_summe = sum(abs(e["q_kvar"]) for e in einstellung.values())
+                def de(wert, stellen):        # Zahl mit Dezimalkomma fuer den Fliesstext
+                    return zahl(wert, stellen).replace(".", ",")
+
+                namen = komp["generatoren"]
                 komp_text = (
                     f"**Kompensation:** Damit keine Knotenspannung über "
-                    f"{komp['ziel_u_pu']} p.u. liegt, müssen "
-                    f"{', '.join(komp['generatoren'])} je **{k:.2f} kvar pro kW** "
-                    f"induktive Blindleistung aufnehmen (|Q|/P = {k:.2f}, "
-                    f"cos φ = {cos_phi:.3f} untererregt), zusammen {q_summe:.1f} kvar. "
-                    + ", ".join(f"{n}: {zahl(e['q_kvar'], 1)} kvar"
+                    f"{de(komp['ziel_u_pu'], 2)} p.u. liegt, müssen "
+                    f"{', '.join(namen[:-1]) + ' und ' + namen[-1] if len(namen) > 1 else namen[0]} "
+                    f"je **{de(k, 2)} kvar pro kW** induktive Blindleistung aufnehmen "
+                    f"(|Q|/P = {de(k, 2)}, cos φ = {de(cos_phi, 3)} untererregt), "
+                    f"zusammen {de(q_summe, 1)} kvar: "
+                    + ", ".join(f"{n} {de(e['q_kvar'], 1)} kvar"
                                 for n, e in einstellung.items()) + ".")
                 print(f"  Kompensation: Q/P = {k:.3f}")
 

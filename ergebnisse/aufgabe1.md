@@ -35,7 +35,7 @@
 
 ## Externes Netz
 
-Positive Werte: das externe Netz speist ein, negative: Rückspeisung.
+Positive Werte: Bezug aus dem vorgelagerten Netz, negative: Rückspeisung.
 
 | Externes Netz | Knoten | U_soll [p.u.] | P [kW] | Q [kvar] |
 | :--- | :--- | ---: | ---: | ---: |
