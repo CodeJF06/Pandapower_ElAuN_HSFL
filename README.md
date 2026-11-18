@@ -20,7 +20,8 @@ Dokumentation der Ergebnisse als Markdown.
 | `abgabe.py` | rechnet beide Aufgaben und erstellt die Abgabe |
 | `Abgabe_EAN-V4.md` | Abgabe mit verlinkten Bildern (für GitHub) |
 | `abgabe/Abgabe_EAN-V4_mit_Bildern.md` | Abgabe als einzelne Datei, Bilder eingebettet |
-| `abgabe/Abgabe_EAN-V4.zip` | alles für den Upload in Stud.IP |
+| `abgabe/Abgabe_EAN-V4.zip` | alles: Skripte, Abgabe und Bilder |
+| `abgabe/Abgabe_EAN-V4_Bericht.zip` | nur der Bericht: `Abgabe_EAN-V4.md` und die Bilder |
 | `ergebnisse/` | Ergebnisse je Aufgabe und alle Bilder |
 
 ## Ausführen

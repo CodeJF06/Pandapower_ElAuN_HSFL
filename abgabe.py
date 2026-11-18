@@ -3,7 +3,8 @@
 Erzeugt:
 - Abgabe_EAN-V4.md                    Bilder verlinkt (fuer GitHub)
 - abgabe/Abgabe_EAN-V4_mit_Bildern.md Bilder eingebettet, eine einzelne Datei
-- abgabe/Abgabe_EAN-V4.zip            alles fuer den Stud.IP-Upload
+- abgabe/Abgabe_EAN-V4.zip            alles: Skripte, Abgabe, Bilder
+- abgabe/Abgabe_EAN-V4_Bericht.zip    nur der Bericht: Abgabe_EAN-V4.md und die Bilder
 """
 
 import base64
@@ -19,6 +20,7 @@ AUSGABE = "Abgabe_EAN-V4.md"
 ORDNER_ABGABE = "abgabe"
 MIT_BILDERN = os.path.join(ORDNER_ABGABE, "Abgabe_EAN-V4_mit_Bildern.md")
 ZIP = os.path.join(ORDNER_ABGABE, "Abgabe_EAN-V4.zip")
+ZIP_BERICHT = os.path.join(ORDNER_ABGABE, "Abgabe_EAN-V4_Bericht.zip")
 ZIP_DATEIEN = ["aufgabe1_grundgeruest.py", "aufgabe1.py", "aufgabe2_grundgeruest.py",
                "aufgabe2.py", "abgabe.py", "requirements.txt", AUSGABE]
 REPO = "https://github.com/CodeJF06/Pandapower_ElAuN_HSFL"
@@ -94,6 +96,18 @@ def packe_zip():
           f"{os.path.getsize(ZIP) / 1024:.0f} kB)")
 
 
+def packe_bericht_zip():
+    """Nur den Bericht (Bilder verlinkt) und die Bilder in eine ZIP-Datei packen."""
+    with open(AUSGABE, encoding="utf-8") as f:
+        bilder = re.findall(r"!\[[^\]]*\]\(([^)]+\.png)\)", f.read())
+    with zipfile.ZipFile(ZIP_BERICHT, "w", zipfile.ZIP_DEFLATED) as z:
+        z.write(AUSGABE, arcname=os.path.basename(AUSGABE))
+        for bild in dict.fromkeys(bilder):
+            z.write(os.path.join(os.path.dirname(AUSGABE) or ".", bild), arcname=bild)
+    print(f"Geschrieben: {ZIP_BERICHT} ({len(set(bilder)) + 1} Dateien, "
+          f"{os.path.getsize(ZIP_BERICHT) / 1024:.0f} kB)")
+
+
 def main():
     # Pfade gelten relativ zum Ordner dieser Datei, egal von wo gestartet wird
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -105,6 +119,7 @@ def main():
     schreibe(AUSGABE, text)
     schreibe(MIT_BILDERN, bilder_einbetten(text, os.path.dirname(AUSGABE) or "."))
     packe_zip()
+    packe_bericht_zip()
 
 
 if __name__ == "__main__":
