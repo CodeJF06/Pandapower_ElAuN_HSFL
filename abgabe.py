@@ -95,6 +95,8 @@ def packe_zip():
 
 
 def main():
+    # Pfade gelten relativ zum Ordner dieser Datei, egal von wo gestartet wird
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     aufgabe1.main()
     aufgabe2.main()
     print()
