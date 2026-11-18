@@ -18,6 +18,7 @@ automatisch erzeugt:
 | `aufgabe2_grundgeruest.py` | Teilaufgaben 2.1–2.6, einfache Fassung |
 | `aufgabe2.py` | Aufgabe 2 mit Varianten, Spannungsprofilen und Markdown-Export |
 | `abgabe.py` | rechnet beide Aufgaben und erzeugt diese Datei |
+| `ergebnisse/` | Ergebnisse je Aufgabe und alle Bilder |
 
 ## Inhalt
 
