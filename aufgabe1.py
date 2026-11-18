@@ -207,7 +207,7 @@ def md_ergebnisse(net, ebene):
          for l, r in zip(net.line.itertuples(), net.res_line.itertuples())]))
 
     teile.append(f"{h} Externes Netz\n\n"
-                 "Positive Werte: das externe Netz speist ein, negative: Rückspeisung.\n\n"
+                 "Positive Werte: Bezug aus dem vorgelagerten Netz, negative: Rückspeisung.\n\n"
                  + md_tabelle(
                      ["Externes Netz", "Knoten", "U_soll [p.u.]", "P [kW]", "Q [kvar]"],
                      [[e.name, busname(net, e.bus), f"{e.vm_pu:.2f}",
