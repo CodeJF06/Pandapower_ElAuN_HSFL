@@ -14,9 +14,10 @@ Dokumentation der Ergebnisse als Markdown.
 | Datei | Inhalt |
 | :--- | :--- |
 | `aufgabe1_grundgeruest.py` | Aufgabe 1 in einfacher Form: Netz aufbauen, rechnen, Ergebnisse ausgeben |
-| `aufgabe1.py` | Aufgabe 1 mit Netzdaten oben, Netzplan und Markdown-Export |
+| `aufgabe1.py` | Aufgabe 1: Netzdaten oben, erzeugt Netzplan und Markdown |
 | `aufgabe2_grundgeruest.py` | Teilaufgaben 2.1–2.6 in einfacher Form |
-| `aufgabe2.py` | Aufgabe 2 mit Varianten, Spannungsprofilen, automatischer Kompensation (2.6) und Beobachtungen |
+| `aufgabe2.py` | Aufgabe 2: Netzdaten, Varianten je Teilaufgabe und Beobachtungen |
+| `netzberechnung.py` | gemeinsamer Code: Lastfluss, Tabellen, Netzplan, Spannungsprofile, automatische Kompensation (2.6) |
 | `abgabe.py` | rechnet beide Aufgaben und erstellt die Abgabe |
 | `Abgabe_EAN-V4.md` | Abgabe mit verlinkten Bildern (für GitHub) |
 | `abgabe/Abgabe_EAN-V4_mit_Bildern.md` | Abgabe als einzelne Datei, Bilder eingebettet |
@@ -56,6 +57,11 @@ In `aufgabe2.py` beschreibt `ABSCHNITTE` jede Teilaufgabe: eine gemeinsame
 Einstellung und die Varianten, die berechnet werden, z. B.
 `{"titel": "P = 10 kW", "G4": {"p_kw": 10}}`. Jede Variante startet vom Netz
 oben. Beobachtungen stehen bei `"notiz"` und erscheinen in der Abgabe.
+
+Der Rechen- und Exportcode für alle Aufgaben steht in `netzberechnung.py`; die
+Aufgaben-Dateien enthalten nur Daten. Für eine neue Aufgabe `aufgabe2.py`
+kopieren, `TITEL`, `AUSGABE`, Netzdaten und `ABSCHNITTE` anpassen. Das Modul
+muss im selben Ordner liegen.
 
 ## Vorzeichen
 

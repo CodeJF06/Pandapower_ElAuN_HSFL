@@ -22,7 +22,7 @@ MIT_BILDERN = os.path.join(ORDNER_ABGABE, "Abgabe_EAN-V4_mit_Bildern.md")
 ZIP = os.path.join(ORDNER_ABGABE, "Abgabe_EAN-V4.zip")
 ZIP_BERICHT = os.path.join(ORDNER_ABGABE, "Abgabe_EAN-V4_Bericht.zip")
 ZIP_DATEIEN = ["aufgabe1_grundgeruest.py", "aufgabe1.py", "aufgabe2_grundgeruest.py",
-               "aufgabe2.py", "abgabe.py", "requirements.txt", AUSGABE]
+               "aufgabe2.py", "netzberechnung.py", "abgabe.py", "requirements.txt", AUSGABE]
 REPO = "https://github.com/CodeJF06/Pandapower_ElAuN_HSFL"
 
 KOPF = f"""# Labor EAN-V4: Einführung in die Netzberechnung
@@ -41,9 +41,10 @@ automatisch erzeugt:
 | Datei | Inhalt |
 | :--- | :--- |
 | `aufgabe1_grundgeruest.py` | Netzmodell Aufgabe 1, einfache Fassung |
-| `aufgabe1.py` | Aufgabe 1 mit Netzplan und Markdown-Export |
+| `aufgabe1.py` | Aufgabe 1: Netzdaten, Aufruf von `netzberechnung.py` |
 | `aufgabe2_grundgeruest.py` | Teilaufgaben 2.1–2.6, einfache Fassung |
-| `aufgabe2.py` | Aufgabe 2 mit Varianten, Spannungsprofilen und Markdown-Export |
+| `aufgabe2.py` | Aufgabe 2: Netzdaten, Varianten und Beobachtungen |
+| `netzberechnung.py` | gemeinsamer Code: Lastfluss, Tabellen, Netzplan, Spannungsprofile |
 | `abgabe.py` | rechnet beide Aufgaben und erzeugt diese Datei |
 | `ergebnisse/` | Ergebnisse je Aufgabe und alle Bilder |
 
