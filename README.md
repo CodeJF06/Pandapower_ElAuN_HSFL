@@ -5,7 +5,7 @@ Netzberechnung mit [pandapower](https://www.pandapower.org/) für das Labor
 vier Knoten, Lasten und Generatoren, Lastflussberechnung und automatische
 Dokumentation der Ergebnisse als Markdown.
 
-**Ergebnisse:** [Abgabe_EAN-V4.md](Abgabe_EAN-V4.md)
+**Ergebnisse:** [abgabe/Abgabe_EAN-V4.md](abgabe/Abgabe_EAN-V4.md)
 
 ![Netzmodell aus Aufgabe 2 mit allen Elementen](ergebnisse/aufgabe2_netz.png)
 
@@ -19,7 +19,7 @@ Dokumentation der Ergebnisse als Markdown.
 | `aufgabe2.py` | Aufgabe 2: Netzdaten, Varianten je Teilaufgabe und Beobachtungen |
 | `netzberechnung.py` | gemeinsamer Code: Lastfluss, Tabellen, Netzplan, Spannungsprofile, automatische Kompensation (2.6) |
 | `abgabe.py` | rechnet beide Aufgaben und erstellt die Abgabe |
-| `Abgabe_EAN-V4.md` | Abgabe mit verlinkten Bildern (für GitHub) |
+| `abgabe/Abgabe_EAN-V4.md` | Abgabe mit verlinkten Bildern (für GitHub) |
 | `abgabe/Abgabe_EAN-V4_mit_Bildern.md` | Abgabe als einzelne Datei, Bilder eingebettet |
 | `abgabe/Abgabe_EAN-V4.zip` | alles: Skripte, Abgabe und Bilder |
 | `abgabe/Abgabe_EAN-V4_Bericht.zip` | nur der Bericht: `Abgabe_EAN-V4.md` und die Bilder |
