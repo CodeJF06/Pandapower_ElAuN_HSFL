@@ -56,7 +56,7 @@ def text(s, formelzeichen=True):
     werden als Index gesetzt (S mit Index r)."""
     s = "".join(SONDER.get(c, c) for c in s)
     if formelzeichen:
-        s = re.sub(r"\b([A-Za-z])\\_([A-Za-z]{1,8})\b", r"\1$_\\mathrm{\2}$", s)
+        s = re.sub(r"(?<![A-Za-z0-9])([A-Za-z])\\_([A-Za-z]{1,8})\b", r"\1$_\\mathrm{\2}$", s)
     return "".join(ZEICHEN.get(c, c) for c in s)
 
 
