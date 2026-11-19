@@ -14,39 +14,27 @@ import os
 import pandas as pd
 import pandapower as pp
 
-# 1. load net from Aufgabe 1 and run power flow as radial net (switches open)
+# load net from Aufgabe 1
 datei = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mittelspannungsnetz.json")
 net = pp.from_json(datei)
-net.switch["closed"] = False
-pp.runpp(net)
-
-spannung_strahl = net.res_bus.vm_pu.copy()
-verluste_strahl = net.res_line.pl_mw.sum() + net.res_trafo.pl_mw.sum()
-
-print("Strahlennetz - Knotenspannungen:")
-print(net.res_bus.join(net.bus.name)[["name", "vm_pu"]].round(4).to_string(index=False))
-print(f"Verluste Strahlennetz: {verluste_strahl * 1000:.1f} kW")
 
 
-# 2. close switches -> ring net
-net.switch["closed"] = True
-pp.runpp(net)
+# run power flow with open (Strahlennetz) or closed switches (Ringnetz)
+def rechnen(ring):
+    net.switch["closed"] = ring
+    pp.runpp(net)
+    return net.res_bus.vm_pu.copy(), net.res_line.pl_mw.sum() + net.res_trafo.pl_mw.sum()
 
-spannung_ring = net.res_bus.vm_pu.copy()
-verluste_ring = net.res_line.pl_mw.sum() + net.res_trafo.pl_mw.sum()
 
+# 1. + 2. radial net, then ring net
+u_strahl, verluste_strahl = rechnen(ring=False)
+u_ring, verluste_ring = rechnen(ring=True)
 
-# 3. compare 20 kV busbar and last nodes of the feeders
-namen = ["Sammelschiene 20 kV", "S1 K4", "S2 K4", "S3 K4", "S4 K4"]
-idx = [net.bus.index[net.bus.name == n][0] for n in namen]
-vergleich = pd.DataFrame({
-    "Knoten": namen,
-    "U Strahl [p.u.]": spannung_strahl[idx].values,
-    "U Ring [p.u.]": spannung_ring[idx].values,
-})
+# 3. compare node voltages and losses
+vergleich = pd.DataFrame({"U Strahl [p.u.]": u_strahl, "U Ring [p.u.]": u_ring}).set_axis(net.bus.name)
 vergleich["Differenz [p.u.]"] = vergleich["U Ring [p.u.]"] - vergleich["U Strahl [p.u.]"]
-print("\nVergleich Strahlennetz / Ringnetz:")
-print(vergleich.round(4).to_string(index=False))
+print("Knotenspannungen:")
+print(vergleich.round(4))
 
 print(f"\nVerluste Strahlennetz: {verluste_strahl * 1000:.1f} kW")
 print(f"Verluste Ringnetz:     {verluste_ring * 1000:.1f} kW")
