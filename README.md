@@ -6,10 +6,27 @@ Ordner; die Ergebnisse werden automatisch als Markdown-Bericht erzeugt.
 
 | Versuch | Thema | Bericht |
 | :--- | :--- | :--- |
-| [EAN-V4](EAN-V4) | Einführung in die Netzberechnung: Niederspannungsstrang mit Lasten und Generatoren | [Abgabe_EAN-V4.md](EAN-V4/abgabe/Abgabe_EAN-V4.md) |
-| [EAN-V5](EAN-V5) | Mittelspannungsnetz in Ringtopologie: Strahlen- und Ringnetz | [Abgabe_EAN-V5.md](EAN-V5/abgabe/Abgabe_EAN-V5.md) |
+| [EAN-V4](EAN-V4) | Einführung in die Netzberechnung: Niederspannungsstrang mit Lasten und Generatoren | [Markdown](EAN-V4/abgabe/Abgabe_EAN-V4.md) · [PDF](EAN-V4/abgabe/Abgabe_EAN-V4.pdf) |
+| [EAN-V5](EAN-V5) | Mittelspannungsnetz in Ringtopologie: Strahlen- und Ringnetz | [Markdown](EAN-V5/abgabe/Abgabe_EAN-V5.md) · [PDF](EAN-V5/abgabe/Abgabe_EAN-V5.pdf) |
 
-![Mittelspannungsringnetz aus EAN-V5](EAN-V5/ergebnisse/aufgabe2_ergebnis.png)
+### EAN-V4: Niederspannungsstrang
+
+Vier Knoten mit je 150 m Kabel NAYY 4x120 SE, Lasten und Generatoren an den
+Knoten 2 bis 4 (ausgeschaltete Elemente grau). Untersucht wird, wie Last,
+Einspeisung und Blindleistung die Spannung entlang des Strangs verändern, bis
+hin zur Kompensation der Spannungserhöhung durch Blindleistung der Generatoren.
+
+![Netzplan des Niederspannungsstrangs aus EAN-V4](EAN-V4/ergebnisse/aufgabe2_netz.png)
+
+### EAN-V5: Mittelspannungsringnetz
+
+Vier 20-kV-Stränge hinter einem 40-MVA-Trafo, links als Kabel-, rechts als
+Freileitungsring. Das Spannungsprofil zeigt das Kernergebnis: Die
+Freileitungsstränge haben trotz geringerer Auslastung den größeren
+Spannungsabfall, und der Ringschluss (gestrichelt) gleicht die Spannungen an
+den Strangenden an, ändert aber insgesamt nur wenig.
+
+![Spannungsprofil Strahl- und Ringnetz aus EAN-V5](EAN-V5/ergebnisse/aufgabe3_profil.png)
 
 ## Aufbau
 
