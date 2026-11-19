@@ -1,10 +1,10 @@
 """Labor EAN-V4: rechnet Aufgabe 1 und 2 und erstellt die Abgabe.
 
-Erzeugt:
+Erzeugt im Ordner abgabe/:
 - Abgabe_EAN-V4.md                    Bilder verlinkt (fuer GitHub)
-- abgabe/Abgabe_EAN-V4_mit_Bildern.md Bilder eingebettet, eine einzelne Datei
-- abgabe/Abgabe_EAN-V4.zip            alles: Skripte, Abgabe, Bilder
-- abgabe/Abgabe_EAN-V4_Bericht.zip    nur der Bericht: Abgabe_EAN-V4.md und die Bilder
+- Abgabe_EAN-V4_mit_Bildern.md        Bilder eingebettet, eine einzelne Datei
+- Abgabe_EAN-V4.zip                   alles: Skripte, Abgabe, Bilder
+- Abgabe_EAN-V4_Bericht.zip           nur der Bericht: Abgabe_EAN-V4.md und die Bilder
 """
 
 import base64
@@ -16,14 +16,16 @@ import zipfile
 import aufgabe1
 import aufgabe2
 
-AUSGABE = "Abgabe_EAN-V4.md"
 ORDNER_ABGABE = "abgabe"
+AUSGABE = os.path.join(ORDNER_ABGABE, "Abgabe_EAN-V4.md")
 MIT_BILDERN = os.path.join(ORDNER_ABGABE, "Abgabe_EAN-V4_mit_Bildern.md")
 ZIP = os.path.join(ORDNER_ABGABE, "Abgabe_EAN-V4.zip")
 ZIP_BERICHT = os.path.join(ORDNER_ABGABE, "Abgabe_EAN-V4_Bericht.zip")
 ZIP_DATEIEN = ["aufgabe1_grundgeruest.py", "aufgabe1.py", "aufgabe2_grundgeruest.py",
-               "aufgabe2.py", "netzberechnung.py", "abgabe.py", "requirements.txt", AUSGABE]
+               "aufgabe2.py", "netzberechnung.py", "abgabe.py", "requirements.txt"]
 REPO = "https://github.com/CodeJF06/Pandapower_ElAuN_HSFL"
+DATUM = datetime.date(2026, 11, 18)      # None = Datum des Laufs
+DATUM = DATUM or datetime.date.today()
 
 KOPF = f"""# Labor EAN-V4: Einführung in die Netzberechnung
 
@@ -32,7 +34,7 @@ Labor Elektrische Anlagen und Netze 1, WS 2026/27
 | | |
 | :--- | :--- |
 | Name | Julian Fehre |
-| Datum | {datetime.date.today():%d.%m.%Y} |
+| Datum | {DATUM:%d.%m.%Y} |
 | Code | [{REPO.removeprefix("https://")}]({REPO}) |
 
 Alle Ergebnisse wurden mit pandapower berechnet und von den Python-Skripten
@@ -84,15 +86,31 @@ def schreibe(datei, text):
     print(f"Geschrieben: {datei} ({os.path.getsize(datei) / 1024:.0f} kB)")
 
 
-def in_zip(z, quelle, name):
-    """Datei mit festem Zeitstempel (heutiges Datum) in die ZIP schreiben, damit
-    sich die ZIP bei gleichem Inhalt nicht bei jedem Lauf aendert."""
-    info = zipfile.ZipInfo(name.replace(os.sep, "/"),
-                           date_time=datetime.date.today().timetuple()[:6])
+def in_zip(z, quelle, name, daten=None):
+    """Datei (oder `daten`) mit festem Zeitstempel (DATUM) in die ZIP schreiben,
+    damit sich die ZIP bei gleichem Inhalt nicht bei jedem Lauf aendert."""
+    info = zipfile.ZipInfo(name.replace(os.sep, "/"), date_time=DATUM.timetuple()[:6])
     info.compress_type = zipfile.ZIP_DEFLATED
     info.external_attr = 0o644 << 16
-    with open(quelle, "rb") as f:
-        z.writestr(info, f.read())
+    if daten is None:
+        with open(quelle, "rb") as f:
+            daten = f.read()
+    z.writestr(info, daten)
+
+
+def bericht_fuer_zip():
+    """Bericht mit Bildpfaden relativ zur ZIP-Wurzel (Bericht liegt dort oben)
+    und die Liste dieser Bildpfade."""
+    with open(AUSGABE, encoding="utf-8") as f:
+        text = f.read()
+    bilder = []
+
+    def ersetze(m):
+        pfad = os.path.normpath(os.path.join(os.path.dirname(AUSGABE), m[2]))
+        bilder.append(pfad)
+        return f"![{m[1]}]({pfad.replace(os.sep, '/')})"
+    text = re.sub(r"!\[([^\]]*)\]\(([^)]+\.png)\)", ersetze, text)
+    return text.encode("utf-8"), list(dict.fromkeys(bilder))
 
 
 def packe_zip():
@@ -100,23 +118,24 @@ def packe_zip():
     dateien = list(ZIP_DATEIEN) + [MIT_BILDERN]
     for ordner in {os.path.dirname(aufgabe1.AUSGABE), os.path.dirname(aufgabe2.AUSGABE)}:
         dateien += sorted(os.path.join(ordner, d) for d in os.listdir(ordner))
+    bericht, _ = bericht_fuer_zip()
     with zipfile.ZipFile(ZIP, "w", zipfile.ZIP_DEFLATED) as z:
+        in_zip(z, AUSGABE, os.path.basename(AUSGABE), bericht)
         for datei in dict.fromkeys(dateien):
             name = os.path.basename(datei) if datei == MIT_BILDERN else os.path.relpath(datei)
             in_zip(z, datei, name)
-    print(f"Geschrieben: {ZIP} ({len(set(dateien))} Dateien, "
+    print(f"Geschrieben: {ZIP} ({len(set(dateien)) + 1} Dateien, "
           f"{os.path.getsize(ZIP) / 1024:.0f} kB)")
 
 
 def packe_bericht_zip():
     """Nur den Bericht (Bilder verlinkt) und die Bilder in eine ZIP-Datei packen."""
-    with open(AUSGABE, encoding="utf-8") as f:
-        bilder = re.findall(r"!\[[^\]]*\]\(([^)]+\.png)\)", f.read())
+    bericht, bilder = bericht_fuer_zip()
     with zipfile.ZipFile(ZIP_BERICHT, "w", zipfile.ZIP_DEFLATED) as z:
-        in_zip(z, AUSGABE, os.path.basename(AUSGABE))
-        for bild in dict.fromkeys(bilder):
-            in_zip(z, os.path.join(os.path.dirname(AUSGABE) or ".", bild), bild)
-    print(f"Geschrieben: {ZIP_BERICHT} ({len(set(bilder)) + 1} Dateien, "
+        in_zip(z, AUSGABE, os.path.basename(AUSGABE), bericht)
+        for bild in bilder:
+            in_zip(z, bild, bild)
+    print(f"Geschrieben: {ZIP_BERICHT} ({len(bilder) + 1} Dateien, "
           f"{os.path.getsize(ZIP_BERICHT) / 1024:.0f} kB)")
 
 
