@@ -16,6 +16,7 @@ Ordner; die Ergebnisse werden automatisch als Markdown-Bericht erzeugt.
 ```
 netzberechnung.py        gemeinsamer Code: Lastfluss, Tabellen, Netzplan, Spannungsprofile
 abgabe_werkzeug.py       gemeinsamer Code: Bericht zusammenfassen, Bilder einbetten, ZIPs
+latex_export.py          gemeinsamer Code: Markdown-Bericht nach LaTeX umwandeln und zur PDF kompilieren
 requirements.txt
 EAN-V4/
 EAN-V5/
@@ -32,8 +33,9 @@ Jeder Versuchsordner ist gleich aufgebaut:
 | `ergebnisse/` | Ergebnisse je Aufgabe und alle Bilder |
 | `abgabe/Abgabe_EAN-Vx.md` | Bericht mit verlinkten Bildern (für GitHub) |
 | `abgabe/Abgabe_EAN-Vx_mit_Bildern.md` | Bericht als einzelne Datei, Bilder eingebettet |
+| `abgabe/Abgabe_EAN-Vx.tex` / `.pdf` | Bericht als LaTeX und als kompilierte PDF |
 | `abgabe/Abgabe_EAN-Vx.zip` | alles: gemeinsamer Code, Skripte, Ergebnisse, Bericht |
-| `abgabe/Abgabe_EAN-Vx_Bericht.zip` | nur der Bericht und seine Bilder (für Stud.IP) |
+| `abgabe/Abgabe_EAN-Vx_Bericht.zip` | nur der Bericht (.md, .tex, .pdf) und seine Bilder (für Stud.IP) |
 
 ## Ausführen
 
@@ -54,6 +56,17 @@ gestartet wird. Die Grundgerüste von V5 Aufgabe 2 und 3 laden das Netz, das
 Für die Bilder in V5 Aufgabe 2 braucht plotly das Paket `kaleido` und einen
 installierten Chrome- oder Edge-Browser; ohne beides wird nur die interaktive
 HTML-Grafik gespeichert.
+
+## Bericht als LaTeX und PDF
+
+`abgabe.py` wandelt den Markdown-Bericht automatisch in `Abgabe_EAN-Vx.tex` um:
+Titelseite mit Name und Datum, Inhaltsverzeichnis, Tabellen (breite Tabellen
+werden auf Seitenbreite skaliert), Bilder mit Beschriftung. Ist `pdflatex`
+installiert (TeX Live oder MiKTeX), entsteht daraus direkt `Abgabe_EAN-Vx.pdf`;
+sonst lässt sich die `.tex` z. B. in Overleaf kompilieren. Die `.tex` in der
+Bericht-ZIP verweist auf die Bilder in der ZIP und kompiliert für sich allein.
+Bei gleichem Inhalt sind PDF und ZIPs byte-gleich, es entstehen also keine
+unnötigen Änderungen im Repo.
 
 ## Netz anpassen
 

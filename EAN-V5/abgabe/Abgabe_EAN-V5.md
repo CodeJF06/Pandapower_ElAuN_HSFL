@@ -190,7 +190,7 @@ pio.templates.default = "plotly_white"
 simple_plotly(net)
 ```
 
-![aufgabe2_netz](../ergebnisse/aufgabe2_netz.png)
+![Netzgrafik mit simple_plotly](../ergebnisse/aufgabe2_netz.png)
 
 Interaktive Fassung: [aufgabe2_netz.html](../ergebnisse/aufgabe2_netz.html)
 
@@ -200,7 +200,7 @@ Die Grafik zeigt die Knoten (blau), die Leitungen (grau), den Transformator (gr�
 
 Erstellt mit `pf_res_plotly(net)` nach der Lastflussberechnung (Farbskalen: Spannung 0,85–1,0 p.u., Auslastung 0–120 %).
 
-![aufgabe2_ergebnis](../ergebnisse/aufgabe2_ergebnis.png)
+![Ergebnisdarstellung mit pf_res_plotly: Spannung und Auslastung](../ergebnisse/aufgabe2_ergebnis.png)
 
 Interaktive Fassung: [aufgabe2_ergebnis.html](../ergebnisse/aufgabe2_ergebnis.html)
 

@@ -46,14 +46,15 @@ import netz  # noqa: E402
 pio.templates.default = "plotly_white"
 
 
-def speichere(fig, ordner, name):
+def speichere(fig, ordner, name, titel):
     """Speichert die Grafik als HTML (immer) und als PNG (wenn kaleido einen
     Browser findet). Gibt den Markdown-Text fuer den Bericht zurueck."""
-    fig.write_html(os.path.join(ordner, f"{name}.html"), include_plotlyjs="cdn")
+    fig.write_html(os.path.join(ordner, f"{name}.html"), include_plotlyjs="cdn",
+                   div_id=name)                  # feste ID: Datei aendert sich nicht bei jedem Lauf
     try:
         fig.write_image(os.path.join(ordner, f"{name}.png"), width=900, height=700, scale=2)
         print(f"Bild gespeichert:       {os.path.join(ordner, name)}.png")
-        return f"![{name}]({name}.png)\n\nInteraktive Fassung: [{name}.html]({name}.html)"
+        return f"![{titel}]({name}.png)\n\nInteraktive Fassung: [{name}.html]({name}.html)"
     except Exception as fehler:          # kaleido oder Browser fehlt
         print(f"PNG nicht moeglich ({fehler}); nur HTML gespeichert.")
         return f"Interaktive Grafik: [{name}.html]({name}.html) (Bildexport nicht verfügbar)"
@@ -78,12 +79,13 @@ def main():
         "```python\nfrom pandapower.plotting.plotly import simple_plotly\n"
         "import plotly.io as pio\npio.templates.default = \"plotly_white\"\n"
         "simple_plotly(net)\n```",
-        speichere(fig_netz, ordner, "aufgabe2_netz"),
+        speichere(fig_netz, ordner, "aufgabe2_netz", "Netzgrafik mit simple_plotly"),
         NOTIZEN.get("netz"),
         "## Ergänzend: Ergebnisdarstellung (Strahlennetz)\n\n"
         "Erstellt mit `pf_res_plotly(net)` nach der Lastflussberechnung "
         "(Farbskalen: Spannung 0,85–1,0 p.u., Auslastung 0–120 %).",
-        speichere(fig_ergebnis, ordner, "aufgabe2_ergebnis"),
+        speichere(fig_ergebnis, ordner, "aufgabe2_ergebnis",
+                  "Ergebnisdarstellung mit pf_res_plotly: Spannung und Auslastung"),
         NOTIZEN.get("ergebnis"),
     ])
 
