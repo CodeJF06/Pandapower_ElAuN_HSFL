@@ -51,10 +51,20 @@ PRAEAMBEL = r"""\documentclass[11pt,a4paper]{article}
 """
 
 
-def text(s):
-    """Normalen Text fuer LaTeX maskieren."""
+def text(s, formelzeichen=True):
+    """Normalen Text fuer LaTeX maskieren. Formelzeichen wie S_r, u_k oder I_max
+    werden als Index gesetzt (S mit Index r)."""
     s = "".join(SONDER.get(c, c) for c in s)
+    if formelzeichen:
+        s = re.sub(r"\b([A-Za-z])\\_([A-Za-z]{1,8})\b", r"\1$_\\mathrm{\2}$", s)
     return "".join(ZEICHEN.get(c, c) for c in s)
+
+
+def code(s):
+    """Code in Schreibmaschinenschrift; Umbruch nach / und _ erlaubt, damit
+    lange Dateinamen in schmalen Tabellenspalten nicht ueberlaufen."""
+    s = text(s, formelzeichen=False).replace("/", r"/\allowbreak{}")
+    return r"\texttt{" + s.replace(r"\_", r"\_\allowbreak{}") + "}"
 
 
 def inline(s):
@@ -63,7 +73,7 @@ def inline(s):
     for m in INLINE.finditer(s):
         teile.append(text(s[pos:m.start()]))
         if m[1] is not None:
-            teile.append(r"\texttt{" + text(m[1]) + "}")
+            teile.append(code(m[1]))
         elif m[2] is not None:
             teile.append(r"\textbf{" + inline(m[2]) + "}")
         elif m[4].startswith("#"):                     # Anker im Bericht: nur Text

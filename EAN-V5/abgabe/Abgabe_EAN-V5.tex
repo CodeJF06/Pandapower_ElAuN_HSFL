@@ -49,11 +49,11 @@ Alle Ergebnisse wurden mit pandapower berechnet und von den Python-Skripten auto
 \toprule
 \textbf{Datei} & \textbf{Inhalt} \\
 \midrule
-\texttt{EAN-V5/aufgabe1\_grundgeruest.py} \dots{} \texttt{aufgabe3\_grundgeruest.py} & Aufgaben 1–3, einfache Fassung \\
-\texttt{EAN-V5/netz.py} & Netzdaten (Abbildung 1, Tabelle 1) und gemeinsamer Code für V5 \\
-\texttt{EAN-V5/aufgabe1.py} \dots{} \texttt{aufgabe3.py} & Auswertung je Aufgabe mit Antworten \\
-\texttt{EAN-V5/abgabe.py} & rechnet alle Aufgaben und erzeugt diese Datei \\
-\texttt{EAN-V5/ergebnisse/} & Ergebnisse je Aufgabe, Bilder und interaktive Grafiken \\
+\texttt{EAN-V5/\allowbreak{}aufgabe1\_\allowbreak{}grundgeruest.py} \dots{} \texttt{aufgabe3\_\allowbreak{}grundgeruest.py} & Aufgaben 1–3, einfache Fassung \\
+\texttt{EAN-V5/\allowbreak{}netz.py} & Netzdaten (Abbildung 1, Tabelle 1) und gemeinsamer Code für V5 \\
+\texttt{EAN-V5/\allowbreak{}aufgabe1.py} \dots{} \texttt{aufgabe3.py} & Auswertung je Aufgabe mit Antworten \\
+\texttt{EAN-V5/\allowbreak{}abgabe.py} & rechnet alle Aufgaben und erzeugt diese Datei \\
+\texttt{EAN-V5/\allowbreak{}ergebnisse/\allowbreak{}} & Ergebnisse je Aufgabe, Bilder und interaktive Grafiken \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
@@ -72,7 +72,7 @@ Strahlennetz: Die Trennstellen am Ende der Stränge sind geöffnet. Spannung am 
 \begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrlrrrlr}
 \toprule
-\textbf{Typ} & \thead{S\_r \\ {[MVA]}} & \thead{U\_OS / U\_US \\ {[kV]}} & \thead{u\_k \\ {[\%]}} & \thead{u\_kr \\ {[\%]}} & \thead{P\_Fe \\ {[kW]}} & \textbf{Stufen} & \thead{Stufe \\ {[\%]}} \\
+\textbf{Typ} & \thead{S$_\mathrm{r}$ \\ {[MVA]}} & \thead{U$_\mathrm{OS}$ / U$_\mathrm{US}$ \\ {[kV]}} & \thead{u$_\mathrm{k}$ \\ {[\%]}} & \thead{u$_\mathrm{kr}$ \\ {[\%]}} & \thead{P$_\mathrm{Fe}$ \\ {[kW]}} & \textbf{Stufen} & \thead{Stufe \\ {[\%]}} \\
 \midrule
 40 MVA 110/20 kV & 40 & 110 / 20 & 16.20 & 0.34 & 18 & -9 \dots{} 9 & 1.50 \\
 \bottomrule
@@ -87,7 +87,7 @@ Strahlennetz: Die Trennstellen am Ende der Stränge sind geöffnet. Spannung am 
 \begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{llrrrrr}
 \toprule
-\textbf{Leitungstyp} & \textbf{Art} & \thead{R' \\ {[$\Omega$/km]}} & \thead{X' \\ {[$\Omega$/km]}} & \thead{C' \\ {[nF/km]}} & \textbf{X/R} & \thead{I\_max \\ {[A]}} \\
+\textbf{Leitungstyp} & \textbf{Art} & \thead{R' \\ {[$\Omega$/km]}} & \thead{X' \\ {[$\Omega$/km]}} & \thead{C' \\ {[nF/km]}} & \textbf{X/R} & \thead{I$_\mathrm{max}$ \\ {[A]}} \\
 \midrule
 NA2XS2Y 1x150 RM/25 12/20 kV & Kabel & 0.206 & 0.116 & 250 & 0.56 & 319 \\
 149-AL1/24-ST1A 20.0 & Freileitung & 0.194 & 0.337 & 10 & 1.74 & 470 \\
@@ -210,13 +210,13 @@ $-$ Erzeugung & $-$22.000 & 0.000 \\
 + Verluste Leitungen & 1.027 & 0.486 \\
 + Verluste Transformator & 0.103 & 4.101 \\
 \textbf{= Summe} & \textbf{24.930} & \textbf{19.746} \\
-Externes Netz (\texttt{res\_ext\_grid}) & 24.930 & 19.746 \\
+Externes Netz (\texttt{res\_\allowbreak{}ext\_\allowbreak{}grid}) & 24.930 & 19.746 \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
 \end{table}
 
-\textbf{Antwort:} Die ausgetauschte Leistung ist das Ergebnis des externen Netzes (Slack) und steht in \texttt{net.res\_ext\_grid} (alternativ auf der Oberspannungsseite des Trafos in \texttt{net.res\_trafo}). Zur Kontrolle lässt sie sich aus der Leistungsbilanz bestimmen: Summe der Lasten minus Summe der Erzeugung plus alle Verluste. Für die Blindleistung gilt dasselbe mit der Blindleistungsaufnahme von Leitungen und Trafo.
+\textbf{Antwort:} Die ausgetauschte Leistung ist das Ergebnis des externen Netzes (Slack) und steht in \texttt{net.res\_\allowbreak{}ext\_\allowbreak{}grid} (alternativ auf der Oberspannungsseite des Trafos in \texttt{net.res\_\allowbreak{}trafo}). Zur Kontrolle lässt sie sich aus der Leistungsbilanz bestimmen: Summe der Lasten minus Summe der Erzeugung plus alle Verluste. Für die Blindleistung gilt dasselbe mit der Blindleistungsaufnahme von Leitungen und Trafo.
 
 \subsection{1.3 Vergleich der Stränge}
 
@@ -249,7 +249,7 @@ S4 & Freileitung & 11 & 6.4 & 5.0 & 1.4 & 222 & 47.2 & 0.8995 & 0.8995 \\
 \begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lllrrrrr}
 \toprule
-\textbf{Leitung} & \textbf{von} & \textbf{nach} & \thead{Länge \\ {[km]}} & \thead{I \\ {[A]}} & \thead{Auslastung \\ {[\%]}} & \thead{P\_V \\ {[kW]}} & \thead{Q\_V \\ {[kvar]}} \\
+\textbf{Leitung} & \textbf{von} & \textbf{nach} & \thead{Länge \\ {[km]}} & \thead{I \\ {[A]}} & \thead{Auslastung \\ {[\%]}} & \thead{P$_\mathrm{V}$ \\ {[kW]}} & \thead{Q$_\mathrm{V}$ \\ {[kvar]}} \\
 \midrule
 S1 L1 & Sammelschiene 20 kV & S1 K1 & 3 & 375 & 117.5 & 259.6 & 67.8 \\
 S1 L2 & S1 K1 & S1 K2 & 2 & 202 & 63.2 & 50.0 & $-$22.3 \\
@@ -274,7 +274,7 @@ S4 L4 & S4 K3 & S4 K4 & 4 & 0 & 0.0 & 0.0 & $-$4.3 \\
 
 \textbf{Antwort:} Die äußeren Stränge S1 und S3 versorgen deutlich mehr Last (Saldo 10,5 MW gegenüber 1,4 MW) über eine größere Länge (15 km gegenüber 11 km). Sie sind daher wesentlich höher ausgelastet und haben den größeren Spannungsabfall. Am Ende von S1 und S3 steigt die Spannung wieder an, weil G1 bzw. G3 dort einspeisen; in S2 und S4 liegt das Minimum am Strangende.
 
-Bei gleicher Belastung unterscheiden sich Kabel und Freileitung: Die Ströme sind ähnlich (S1 375 A, S3 386 A), das Kabel ist mit I\_max = 319 A aber zu \textbf{117 \% überlastet}, die Freileitung mit I\_max = 470 A nur zu 82 \% ausgelastet. Dafür ist der Spannungsabfall auf der Freileitung größer (U min 0,873 statt 0,892 p.u.), weil ihr Längsblindwiderstand X' fast dreimal so groß ist und die induktive Blindleistung der Lasten dort stärker wirkt; das Kabel liefert zusätzlich kapazitive Blindleistung.
+Bei gleicher Belastung unterscheiden sich Kabel und Freileitung: Die Ströme sind ähnlich (S1 375 A, S3 386 A), das Kabel ist mit I$_\mathrm{max}$ = 319 A aber zu \textbf{117 \% überlastet}, die Freileitung mit I$_\mathrm{max}$ = 470 A nur zu 82 \% ausgelastet. Dafür ist der Spannungsabfall auf der Freileitung größer (U min 0,873 statt 0,892 p.u.), weil ihr Längsblindwiderstand X' fast dreimal so groß ist und die induktive Blindleistung der Lasten dort stärker wirkt; das Kabel liefert zusätzlich kapazitive Blindleistung.
 
 \subsection{1.4 Verluste und Blindleistung}
 
@@ -285,7 +285,7 @@ Q > 0: Aufnahme von Blindleistung, Q < 0: Abgabe (kapazitiv).
 \begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrr}
 \toprule
-\textbf{} & \thead{P\_V \\ {[kW]}} & \thead{Q\_V \\ {[kvar]}} \\
+\textbf{} & \thead{P$_\mathrm{V}$ \\ {[kW]}} & \thead{Q$_\mathrm{V}$ \\ {[kvar]}} \\
 \midrule
 S1 & 451.4 & $-$128.4 \\
 S2 & 59.6 & $-$255.0 \\
@@ -324,11 +324,11 @@ simple_plotly(net)
 
 Interaktive Fassung: \href{../ergebnisse/aufgabe2_netz.html}{aufgabe2\_netz.html}
 
-Die Grafik zeigt die Knoten (blau), die Leitungen (grau), den Transformator (grün) und das externe Netz (gelb). Damit sie wie Abbildung 1 aussieht, haben die Knoten in \texttt{netz.py} Koordinaten bekommen: links der Kabelring (S1, S2), rechts der Freileitungsring (S3, S4). Ohne Koordinaten erzeugt pandapower eine automatische Anordnung. Lasten, Generatoren und die offenen Trennstellen stellt \texttt{simple\_plotly} nicht dar.
+Die Grafik zeigt die Knoten (blau), die Leitungen (grau), den Transformator (grün) und das externe Netz (gelb). Damit sie wie Abbildung 1 aussieht, haben die Knoten in \texttt{netz.py} Koordinaten bekommen: links der Kabelring (S1, S2), rechts der Freileitungsring (S3, S4). Ohne Koordinaten erzeugt pandapower eine automatische Anordnung. Lasten, Generatoren und die offenen Trennstellen stellt \texttt{simple\_\allowbreak{}plotly} nicht dar.
 
 \subsection{Ergänzend: Ergebnisdarstellung (Strahlennetz)}
 
-Erstellt mit \texttt{pf\_res\_plotly(net)} nach der Lastflussberechnung (Farbskalen: Spannung 0,85–1,0 p.u., Auslastung 0–120 \%).
+Erstellt mit \texttt{pf\_\allowbreak{}res\_\allowbreak{}plotly(net)} nach der Lastflussberechnung (Farbskalen: Spannung 0,85–1,0 p.u., Auslastung 0–120 \%).
 
 \begin{figure}[H]
 \centering
@@ -444,7 +444,7 @@ S4 K4 & 0.8995 & 0.8969 & $-$0.0025 & $-$51 \\
 \begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrrrr}
 \toprule
-\textbf{} & \thead{P\_V Strahl \\ {[kW]}} & \thead{P\_V Ring \\ {[kW]}} & \thead{$\Delta$P\_V \\ {[kW]}} & \thead{Q\_V Strahl \\ {[kvar]}} & \thead{Q\_V Ring \\ {[kvar]}} \\
+\textbf{} & \thead{P$_\mathrm{V}$ Strahl \\ {[kW]}} & \thead{P$_\mathrm{V}$ Ring \\ {[kW]}} & \thead{$\Delta$P\_V \\ {[kW]}} & \thead{Q$_\mathrm{V}$ Strahl \\ {[kvar]}} & \thead{Q$_\mathrm{V}$ Ring \\ {[kvar]}} \\
 \midrule
 S1 & 451.4 & 442.9 & $-$8.6 & $-$128.4 & $-$132.4 \\
 S2 & 59.6 & 58.8 & $-$0.8 & $-$255.0 & $-$256.2 \\

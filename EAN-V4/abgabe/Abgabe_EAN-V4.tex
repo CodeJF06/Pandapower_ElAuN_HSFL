@@ -49,12 +49,12 @@ Alle Ergebnisse wurden mit pandapower berechnet und von den Python-Skripten auto
 \toprule
 \textbf{Datei} & \textbf{Inhalt} \\
 \midrule
-\texttt{EAN-V4/aufgabe1\_grundgeruest.py} & Netzmodell Aufgabe 1, einfache Fassung \\
-\texttt{EAN-V4/aufgabe1.py} & Aufgabe 1: Netzdaten, Aufruf von \texttt{netzberechnung.py} \\
-\texttt{EAN-V4/aufgabe2\_grundgeruest.py} & Teilaufgaben 2.1–2.6, einfache Fassung \\
-\texttt{EAN-V4/aufgabe2.py} & Aufgabe 2: Netzdaten, Varianten und Beobachtungen \\
-\texttt{EAN-V4/abgabe.py} & rechnet beide Aufgaben und erzeugt diese Datei \\
-\texttt{EAN-V4/ergebnisse/} & Ergebnisse je Aufgabe und alle Bilder \\
+\texttt{EAN-V4/\allowbreak{}aufgabe1\_\allowbreak{}grundgeruest.py} & Netzmodell Aufgabe 1, einfache Fassung \\
+\texttt{EAN-V4/\allowbreak{}aufgabe1.py} & Aufgabe 1: Netzdaten, Aufruf von \texttt{netzberechnung.py} \\
+\texttt{EAN-V4/\allowbreak{}aufgabe2\_\allowbreak{}grundgeruest.py} & Teilaufgaben 2.1–2.6, einfache Fassung \\
+\texttt{EAN-V4/\allowbreak{}aufgabe2.py} & Aufgabe 2: Netzdaten, Varianten und Beobachtungen \\
+\texttt{EAN-V4/\allowbreak{}abgabe.py} & rechnet beide Aufgaben und erzeugt diese Datei \\
+\texttt{EAN-V4/\allowbreak{}ergebnisse/\allowbreak{}} & Ergebnisse je Aufgabe und alle Bilder \\
 \texttt{netzberechnung.py} & gemeinsamer Code: Lastfluss, Tabellen, Netzplan, Spannungsprofile \\
 \bottomrule
 \end{tabular}
@@ -78,7 +78,7 @@ Alle Ergebnisse wurden mit pandapower berechnet und von den Python-Skripten auto
 \begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrrr}
 \toprule
-\textbf{Leitungstyp} & \thead{R' \\ {[$\Omega$/km]}} & \thead{X' \\ {[$\Omega$/km]}} & \textbf{X/R} & \thead{I\_max \\ {[A]}} \\
+\textbf{Leitungstyp} & \thead{R' \\ {[$\Omega$/km]}} & \thead{X' \\ {[$\Omega$/km]}} & \textbf{X/R} & \thead{I$_\mathrm{max}$ \\ {[A]}} \\
 \midrule
 NAYY 4x120 SE & 0.225 & 0.080 & 0.356 & 242 \\
 \bottomrule
@@ -126,7 +126,7 @@ Knoten 4 & 1.0219 & 408.8 & 0.026 \\
 \begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{llrrrrr}
 \toprule
-\textbf{von} & \textbf{nach} & \thead{Länge \\ {[m]}} & \thead{I \\ {[A]}} & \thead{Auslastung \\ {[\%]}} & \thead{P\_Verlust \\ {[kW]}} & \thead{Q\_Verlust \\ {[kvar]}} \\
+\textbf{von} & \textbf{nach} & \thead{Länge \\ {[m]}} & \thead{I \\ {[A]}} & \thead{Auslastung \\ {[\%]}} & \thead{P$_\mathrm{Verlust}$ \\ {[kW]}} & \thead{Q$_\mathrm{Verlust}$ \\ {[kvar]}} \\
 \midrule
 Knoten 1 & Knoten 2 & 150 & 60.3 & 24.9 & 0.369 & 0.129 \\
 Knoten 2 & Knoten 3 & 150 & 60.3 & 24.9 & 0.369 & 0.129 \\
@@ -145,7 +145,7 @@ Positive Werte: Bezug aus dem vorgelagerten Netz, negative: Rückspeisung.
 \begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{llrrr}
 \toprule
-\textbf{Externes Netz} & \textbf{Knoten} & \thead{U\_soll \\ {[p.u.]}} & \thead{P \\ {[kW]}} & \thead{Q \\ {[kvar]}} \\
+\textbf{Externes Netz} & \textbf{Knoten} & \thead{U$_\mathrm{soll}$ \\ {[p.u.]}} & \thead{P \\ {[kW]}} & \thead{Q \\ {[kvar]}} \\
 \midrule
 Vorgelagertes Netz & Knoten 1 & 1.05 & 41.11 & 15.39 \\
 \bottomrule
@@ -174,7 +174,7 @@ Alle in Aufgabe 2 verwendeten Elemente; ausgeschaltete sind grau dargestellt. Sp
 \begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrrr}
 \toprule
-\textbf{Leitungstyp} & \thead{R' \\ {[$\Omega$/km]}} & \thead{X' \\ {[$\Omega$/km]}} & \textbf{X/R} & \thead{I\_max \\ {[A]}} \\
+\textbf{Leitungstyp} & \thead{R' \\ {[$\Omega$/km]}} & \thead{X' \\ {[$\Omega$/km]}} & \textbf{X/R} & \thead{I$_\mathrm{max}$ \\ {[A]}} \\
 \midrule
 NAYY 4x120 SE & 0.225 & 0.080 & 0.356 & 242 \\
 \bottomrule
