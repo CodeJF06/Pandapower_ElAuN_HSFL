@@ -1,3 +1,6 @@
-# getestet mit Python 3.13, pandapower 3.5.6, matplotlib 3.11.2
+# getestet mit Python 3.13, pandapower 3.5.6, matplotlib 3.11.2, plotly 7.1.0, kaleido 1.5.2
 pandapower
 matplotlib
+plotly
+kaleido
+python-igraph

@@ -6,20 +6,20 @@ Labor Elektrische Anlagen und Netze 1, WS 2026/27
 | :--- | :--- |
 | Name | Julian Fehre |
 | Datum | 18.11.2026 |
-| Code | [github.com/CodeJF06/Pandapower_ElAuN_HSFL](https://github.com/CodeJF06/Pandapower_ElAuN_HSFL) |
+| Code | [github.com/CodeJF06/Pandapower_ElAuN_HSFL](https://github.com/CodeJF06/Pandapower_ElAuN_HSFL/tree/main/EAN-V4) |
 
 Alle Ergebnisse wurden mit pandapower berechnet und von den Python-Skripten
 automatisch erzeugt:
 
 | Datei | Inhalt |
 | :--- | :--- |
-| `aufgabe1_grundgeruest.py` | Netzmodell Aufgabe 1, einfache Fassung |
-| `aufgabe1.py` | Aufgabe 1: Netzdaten, Aufruf von `netzberechnung.py` |
-| `aufgabe2_grundgeruest.py` | Teilaufgaben 2.1–2.6, einfache Fassung |
-| `aufgabe2.py` | Aufgabe 2: Netzdaten, Varianten und Beobachtungen |
+| `EAN-V4/aufgabe1_grundgeruest.py` | Netzmodell Aufgabe 1, einfache Fassung |
+| `EAN-V4/aufgabe1.py` | Aufgabe 1: Netzdaten, Aufruf von `netzberechnung.py` |
+| `EAN-V4/aufgabe2_grundgeruest.py` | Teilaufgaben 2.1–2.6, einfache Fassung |
+| `EAN-V4/aufgabe2.py` | Aufgabe 2: Netzdaten, Varianten und Beobachtungen |
+| `EAN-V4/abgabe.py` | rechnet beide Aufgaben und erzeugt diese Datei |
+| `EAN-V4/ergebnisse/` | Ergebnisse je Aufgabe und alle Bilder |
 | `netzberechnung.py` | gemeinsamer Code: Lastfluss, Tabellen, Netzplan, Spannungsprofile |
-| `abgabe.py` | rechnet beide Aufgaben und erzeugt diese Datei |
-| `ergebnisse/` | Ergebnisse je Aufgabe und alle Bilder |
 
 ## Inhalt
 
