@@ -52,7 +52,7 @@ DETAILTABELLEN = False       # True: alle Tabellen je Variante im Anhang
 import os
 import sys
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from netzberechnung import erstelle_bericht  # noqa: E402
 
 

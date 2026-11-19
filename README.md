@@ -1,29 +1,39 @@
-# Labor EAN-V4: Einführung in die Netzberechnung
+# Labor Elektrische Anlagen und Netze 1: Netzberechnung mit pandapower
 
-Netzberechnung mit [pandapower](https://www.pandapower.org/) für das Labor
-*Elektrische Anlagen und Netze 1* (WS 2026/27): ein Niederspannungsstrang mit
-vier Knoten, Lasten und Generatoren, Lastflussberechnung und automatische
-Dokumentation der Ergebnisse als Markdown.
+Netzberechnungen mit [pandapower](https://www.pandapower.org/) für das Labor
+*Elektrische Anlagen und Netze 1* (WS 2026/27). Jeder Versuch hat einen eigenen
+Ordner; die Ergebnisse werden automatisch als Markdown-Bericht erzeugt.
 
-**Ergebnisse:** [abgabe/Abgabe_EAN-V4.md](abgabe/Abgabe_EAN-V4.md)
+| Versuch | Thema | Bericht |
+| :--- | :--- | :--- |
+| [EAN-V4](EAN-V4) | Einführung in die Netzberechnung: Niederspannungsstrang mit Lasten und Generatoren | [Abgabe_EAN-V4.md](EAN-V4/abgabe/Abgabe_EAN-V4.md) |
+| [EAN-V5](EAN-V5) | Mittelspannungsnetz in Ringtopologie: Strahlen- und Ringnetz | [Abgabe_EAN-V5.md](EAN-V5/abgabe/Abgabe_EAN-V5.md) |
 
-![Netzmodell aus Aufgabe 2 mit allen Elementen](ergebnisse/aufgabe2_netz.png)
+![Mittelspannungsringnetz aus EAN-V5](EAN-V5/ergebnisse/aufgabe2_ergebnis.png)
 
-## Dateien
+## Aufbau
+
+```
+netzberechnung.py        gemeinsamer Code: Lastfluss, Tabellen, Netzplan, Spannungsprofile
+abgabe_werkzeug.py       gemeinsamer Code: Bericht zusammenfassen, Bilder einbetten, ZIPs
+requirements.txt
+EAN-V4/
+EAN-V5/
+```
+
+Jeder Versuchsordner ist gleich aufgebaut:
 
 | Datei | Inhalt |
 | :--- | :--- |
-| `aufgabe1_grundgeruest.py` | Aufgabe 1 in einfacher Form: Netz aufbauen, rechnen, Ergebnisse ausgeben |
-| `aufgabe1.py` | Aufgabe 1: Netzdaten oben, erzeugt Netzplan und Markdown |
-| `aufgabe2_grundgeruest.py` | Teilaufgaben 2.1–2.6 in einfacher Form |
-| `aufgabe2.py` | Aufgabe 2: Netzdaten, Varianten je Teilaufgabe und Beobachtungen |
-| `netzberechnung.py` | gemeinsamer Code: Lastfluss, Tabellen, Netzplan, Spannungsprofile, automatische Kompensation (2.6) |
-| `abgabe.py` | rechnet beide Aufgaben und erstellt die Abgabe |
-| `abgabe/Abgabe_EAN-V4.md` | Abgabe mit verlinkten Bildern (für GitHub) |
-| `abgabe/Abgabe_EAN-V4_mit_Bildern.md` | Abgabe als einzelne Datei, Bilder eingebettet |
-| `abgabe/Abgabe_EAN-V4.zip` | alles: Skripte, Abgabe und Bilder |
-| `abgabe/Abgabe_EAN-V4_Bericht.zip` | nur der Bericht: `Abgabe_EAN-V4.md` und die Bilder |
+| `aufgabeN_grundgeruest.py` | einfache Fassung zum Nachvollziehen im Labor: Netz aufbauen, rechnen, ausgeben |
+| `aufgabeN.py` | Auswertung mit Eingaben oben (Netzdaten, Varianten, Antworten) und Markdown als Ergebnis |
+| `netz.py` (nur V5) | Netzdaten und gemeinsamer Code der V5-Aufgaben |
+| `abgabe.py` | rechnet alle Aufgaben des Versuchs und erstellt die Abgabe |
 | `ergebnisse/` | Ergebnisse je Aufgabe und alle Bilder |
+| `abgabe/Abgabe_EAN-Vx.md` | Bericht mit verlinkten Bildern (für GitHub) |
+| `abgabe/Abgabe_EAN-Vx_mit_Bildern.md` | Bericht als einzelne Datei, Bilder eingebettet |
+| `abgabe/Abgabe_EAN-Vx.zip` | alles: gemeinsamer Code, Skripte, Ergebnisse, Bericht |
+| `abgabe/Abgabe_EAN-Vx_Bericht.zip` | nur der Bericht und seine Bilder (für Stud.IP) |
 
 ## Ausführen
 
@@ -32,36 +42,32 @@ pip install -r requirements.txt
 ```
 
 ```bash
-python abgabe.py
+python EAN-V5/abgabe.py
 ```
 
-Das rechnet beide Aufgaben neu und schreibt alle Ergebnisse, die Abgabe und die
-ZIP-Datei. Einzelne Aufgaben lassen sich auch direkt starten
-(`python aufgabe1.py`, `python aufgabe2.py`) oder in Spyder mit F5.
-Alle Ausgaben landen immer neben den Skripten, egal aus welchem Ordner sie
-gestartet werden.
+Das rechnet alle Aufgaben des Versuchs neu und schreibt Ergebnisse, Bericht und
+ZIP-Dateien. Einzelne Aufgaben lassen sich auch direkt starten oder in Spyder
+mit F5. Alle Ausgaben landen immer im jeweiligen Versuchsordner, egal von wo
+gestartet wird. Die Grundgerüste von V5 Aufgabe 2 und 3 laden das Netz, das
+`aufgabe1_grundgeruest.py` als `mittelspannungsnetz.json` speichert.
+
+Für die Bilder in V5 Aufgabe 2 braucht plotly das Paket `kaleido` und einen
+installierten Chrome- oder Edge-Browser; ohne beides wird nur die interaktive
+HTML-Grafik gespeichert.
 
 ## Netz anpassen
 
-In `aufgabe1.py` und `aufgabe2.py` steht oben ein Abschnitt `NETZDATEN`. Nur dort
-wird etwas geändert, alle Werte in kW, kvar und m:
+**EAN-V4:** In `aufgabe1.py` und `aufgabe2.py` steht oben ein Abschnitt
+`NETZDATEN` (Werte in kW, kvar und m). In `aufgabe2.py` beschreibt `ABSCHNITTE`
+jede Teilaufgabe mit einer gemeinsamen Einstellung und den Varianten, z. B.
+`{"titel": "P = 10 kW", "G4": {"p_kw": 10}}`.
 
-```python
-KNOTEN = ["Knoten 1", "Knoten 2", "Knoten 3", "Knoten 4"]
-LEITUNGEN = [("Knoten 1", "Knoten 2", 150), ...]        # von, nach, Länge in m
-LASTEN = [{"name": "V1", "knoten": "Knoten 4", "p_kw": 40, "q_kvar": 15}]
-GENERATOREN = [{"name": "G4", "knoten": "Knoten 4", "p_kw": 0, "q_kvar": 0, "an": False}]
-```
+**EAN-V5:** Die Netzdaten stehen oben in `netz.py` (Trafo, Leitungstypen,
+Stränge mit Längen, Trennstellen, Lasten mit cos φ, Generatoren; Werte in MW und
+km). Die Antworten zu den Fragen stehen oben in `aufgabe1.py` bis `aufgabe3.py`.
 
-In `aufgabe2.py` beschreibt `ABSCHNITTE` jede Teilaufgabe: eine gemeinsame
-Einstellung und die Varianten, die berechnet werden, z. B.
-`{"titel": "P = 10 kW", "G4": {"p_kw": 10}}`. Jede Variante startet vom Netz
-oben. Beobachtungen stehen bei `"notiz"` und erscheinen in der Abgabe.
-
-Der Rechen- und Exportcode für alle Aufgaben steht in `netzberechnung.py`; die
-Aufgaben-Dateien enthalten nur Daten. Für eine neue Aufgabe `aufgabe2.py`
-kopieren, `TITEL`, `AUSGABE`, Netzdaten und `ABSCHNITTE` anpassen. Das Modul
-muss im selben Ordner liegen.
+Antworten und Beobachtungen stehen jeweils bei `NOTIZEN` bzw. `"notiz"` und
+erscheinen im Bericht.
 
 ## Vorzeichen
 
@@ -69,10 +75,11 @@ muss im selben Ordner liegen.
 - **Generatoren (Static Generator):** P > 0 = Einspeisung; Q < 0 = Aufnahme von
   Blindleistung (induktiv, untererregt), Q > 0 = Abgabe (kapazitiv, übererregt)
 - **Externes Netz:** P, Q > 0 = Bezug aus dem vorgelagerten Netz, < 0 = Rückspeisung
+- **Verluste:** Q > 0 = Aufnahme von Blindleistung, Q < 0 = Abgabe (z. B. Kabelkapazität)
 
 ## Grenzen
 
-- Der Netzplan ist für einen Strang ausgelegt; bei verzweigten Netzen stimmen die
-  Tabellen, aber die Zeichnung kann sich überlagern.
-- Konvergiert eine Variante nicht, wird das in der Abgabe vermerkt und die
-  übrigen Varianten werden trotzdem berechnet.
+- Der Netzplan in V4 ist für einen Strang ausgelegt; bei verzweigten Netzen stimmen
+  die Tabellen, aber die Zeichnung kann sich überlagern.
+- Konvergiert eine Variante nicht, wird das im Bericht vermerkt und die übrigen
+  Varianten werden trotzdem berechnet.

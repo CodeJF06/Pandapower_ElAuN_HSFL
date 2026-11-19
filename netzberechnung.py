@@ -145,7 +145,7 @@ def md_tabelle(kopf, zeilen):
         if text == "–":                      # Platzhalter fuer "kein Wert"
             return True
         try:
-            float(text.replace("−", "-"))
+            float(text.replace("−", "-").strip("*"))
             return True
         except ValueError:
             return False
